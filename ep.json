@@ -1,0 +1,10 @@
+{
+  "parts": [
+    {
+      "name": "ep_new_pad",
+	  "hooks": {
+		"expressCreateServer" : "ep_new_pad/index:registerRoute"
+	  }
+    }
+  ]
+}
