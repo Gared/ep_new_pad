@@ -1,9 +1,25 @@
 {
   "name": "ep_new_pad",
-  "version": "0.1",
-  "description": "Etherpad lite plugin to create a really new pad. It checks if a random string (between 8 and 15 characters) already exists in database. If not it will redirect the user to this page and create the pad. Call http://example.com/randomPad to create a random pad.",
-  "author": "gared (STEFAN MUELLER) <stefan@stefans-entwicklerecke.de>",
-  "contributors": [],
-  "dependencies": {},
-  "engines": { "node": ">= 0.6.0"}
+  "version": "0.0.1",
+  "description": "Etherpad lite plugin to crate a REALLY new pad (database check). Call http://example.com/randomPad to use it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gared/ep_new_pad"
+  },
+  "keywords": [
+    "etherpad",
+    "lite",
+    "plugin",
+    "crate",
+    "really",
+    "new",
+    "pad"
+  ],
+  "author": "gared <stefan@stefans-entwicklerecke.de> (STEFAN MUELLER)",
+  "license": "MIT",
+  "readmeFilename": "README.md"
 }
