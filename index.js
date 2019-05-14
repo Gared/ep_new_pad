@@ -6,38 +6,32 @@ exports.registerRoute = function (hook_name, args, cb) {
     var padName;
     
     createRandomPadName = function() {
-      var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-      var length = Math.floor((Math.random()*15)+8);
+      // the number of distinct chars (64) is chosen to ensure that
+      // the selection will be uniform when using the PRNG below
+      var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
+      // the length of the pad name is chosen to get 120-bit security:
+      // log2(64^20) = 120
+      var string_length = 20;
+      // make room for 8-bit integer values that span from 0 to 255.
+      var randomarray = new Uint8Array(string_length);
+      // use Node.js PRNG to generate a "unique" sequence
+      const crypto = require('crypto');
+      crypto.randomFillSync(randomarray);
       var randomstring = '';
-      for (var i = 0; i < length; i++)
+      for (var i = 0; i < string_length; i++)
       {
-        var charNum = Math.floor(Math.random() * chars.length);
-        randomstring += chars.substring(charNum, charNum + 1);
+        // instead of writing "Math.floor(randomarray[i]/256*64)"
+        // we can save some cycles.
+        var rnum = Math.floor(randomarray[i]/4);
+        randomstring += chars.substring(rnum, rnum + 1);
       }
       return randomstring;
     };
 
-    findPad = function(padNameString, cb) {
-      // check if pad exists already
-      padManager.doesPadExists(padNameString, function(err, exists) {
-        // if it exists already
-        if (exists) {
-          // try another pad name
-          findPad(createRandomPadName(), cb);
-        } else {
-          // save new pad name
-          padName = padNameString;
-          cb();
-        }
-      });
-    };
-    
   	async.series([
-	  function(callback){
-        // find a really new pad
-        padName = findPad(createRandomPadName(), callback);
-      },
       function (callback) {
+        // find a really new pad
+        padName = createRandomPadName();
         // redirect to new pad
         res.writeHead(302, {
           'Location': '/p/'+padName
