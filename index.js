@@ -34,7 +34,7 @@ exports.registerRoute = function (hook_name, args, cb) {
         padName = createRandomPadName();
         // redirect to new pad
         res.writeHead(302, {
-          'Location': '/p/'+padName
+          'Location': 'p/'+padName
         });
         res.end();
         callback();
