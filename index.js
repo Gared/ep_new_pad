@@ -6,7 +6,7 @@ const crypto = require('crypto');
 exports.registerRoute = function (hook_name, args, cb) {
   args.app.get('/randomPad', function (req, res) {
 
-    createRandomPadName = function () {
+    var createRandomPadName = function () {
       // the number of distinct chars (64) is chosen to ensure that
       // the selection will be uniform when using the PRNG below
       var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
