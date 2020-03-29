@@ -1,6 +1,6 @@
 {
   "name": "ep_new_pad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Etherpad lite plugin to create a REALLY new pad (using PRNG) on server-side. Open https://example.com/randomPad to use it.",
   "main": "index.js",
   "scripts": {
